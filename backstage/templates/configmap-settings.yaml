@@ -5,13 +5,13 @@ metadata:
   labels:
     {{- include "backstage.labels" . | nindent 4 }}  
 data:
-    BACKSTAGE_BASE_URL:
-    NODE_ENV:
-    GITHUB_APP_ID:
-    POSTGRES_DATABASE:
-    POSTGRES_HOST:
-    POSTGRES_PORT:
-    POSTGRES_USER:
-    AUTH_GITHUB_CLIENT_ID:
-    AUTH_GITHUB_WEBHOOK_URL:
-    AUTH_GITHUB_WEBHOOK_SECRET:
+  BACKSTAGE_BASE_URL: https://backstage.globaldnadevweudevaks-pool-aks.dna.internal.mars
+  NODE_ENV: production
+  GITHUB_APP_ID: "257245"
+  POSTGRES_DATABASE: backstagetoolweudevdb
+  POSTGRES_HOST: backstagetoolweudevpsql.postgres.database.azure.com
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: backstagetoolweudevpsqladmin@backstagetoolweudevpsql
+  AUTH_GITHUB_CLIENT_ID: Iv1.bbd496e9e4f9c2e5
+  AUTH_GITHUB_WEBHOOK_URL: http://banana # This shouldn't matter, no webhooks are actually used, but the github integration requires a value
+  AUTH_GITHUB_WEBHOOK_SECRET: banana # This shouldn't matter, no webhooks are actually used, but the github integration requires a value

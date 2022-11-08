@@ -37,8 +37,8 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
+  className: "nginx"
   annotations: 
     cert-manager.io/cluster-issuer: self-signed
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
