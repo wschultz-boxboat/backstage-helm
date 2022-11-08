@@ -39,5 +39,6 @@ spec:
                 name: {{ $fullName }}
                 port:
                   number: {{ .Values.service.port }}
+          {{- end}}
     {{- end }}
 {{- end }}

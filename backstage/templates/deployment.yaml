@@ -33,9 +33,9 @@ spec:
           - mountPath: app/app-config/app-config.production.yaml
             name: backstage-app-config
             subPath: app-confing.production.yaml
-        imagePullSecrets:
-        - name: pullsecret
-        volumes:
-        - configMap:
-            name: backstage-app-config
+      imagePullSecrets:
+      - name: pullsecret
+      volumes:
+      - configMap:
           name: backstage-app-config
+        name: backstage-app-config
