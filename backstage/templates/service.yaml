@@ -4,12 +4,13 @@ metadata:
   name: {{ include "backstage.fullname" . }}
   labels:
     {{- include "backstage.labels" . | nindent 4 }}
+    # Private load balancer for AKS. AKS needs network contributor on the vnet.
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: 7007
       protocol: TCP
-      name: http
   selector:
     {{- include "backstage.selectorLabels" . | nindent 4 }}

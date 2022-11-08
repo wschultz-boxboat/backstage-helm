@@ -5,23 +5,19 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: backstagetooldevconreg.azurecr.io/backstage-poc
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: main
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+secrets:
+  github_client_secret: "default"
+  github_client_private_key: "default"
+  postgresql_password: "default"
 
 podAnnotations: {}
 
@@ -43,18 +39,19 @@ service:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations: 
+    cert-manager.io/cluster-issuer: self-signed
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
-    - host: chart-example.local
+    - host: backstage.globaldnadevweudevaks-pool-aks.dna.internal.mars
       paths:
         - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+          pathType: Prefix
+  tls: 
+  - hosts:
+      - backstage.globaldnadevweudevaks-pool-aks.dna.internal.mars
+    secretName: self-signed-tls-secret
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -69,11 +66,7 @@ resources: {}
   #   memory: 128Mi
 
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  enabled: true
 
 nodeSelector: {}
 
